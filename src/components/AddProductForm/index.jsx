@@ -1,19 +1,41 @@
+import { async } from "@firebase/util";
 import React, { useState } from "react";
 import "./style.css";
 
 export default function AddProductForm() {
+    let [fileSelect, setFileSelect] = useState({});
+    let [itemName,setItemName] = useState("")
+    const [category, setCategory] = useState("Fruit");
+    let [itemDes,setItemDes] = useState("");
+    let [itemUnitName,setItemUnitName] = useState("")
+    let [itemUnitPrice,setItemUnitPrice] = useState("")
+
   let categoryList = ["Fruits", "Meats", "Vagetable", "Groceries"];
-  const [category, setCategory] = useState("Fruit");
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
+
+  console.log(fileSelect,itemName,category,itemDes)
+
+  async function addItemToFirebaseDB(){
+    try {   
+    
+        // const imgUrl = await uploadImage(fileSelect);
+        // await addItemToDb( imgUrl);
+
+    } catch (error) {
+        alert('error' + error)
+    }
+
+  }
   return (
     <div className="container add_item_cont">
       <div className="mb-3">
         <label for="formFile" className="form-label">
          Item Image
         </label>
-        <input className="form-control" type="file" id="formFile" />
+        <input  onChange={(e) => {
+                setFileSelect(e.target.files[0])}} className="form-control" type="file" id="formFile" />
       </div>
 
       <div className="mb-3">
@@ -21,6 +43,8 @@ export default function AddProductForm() {
           Item Name
         </label>
         <input
+          onChange={(e) => {
+            setItemName(e.target.value)}}
           type="text"
           className="form-control"
           id="exampleInputText1"
@@ -52,6 +76,8 @@ export default function AddProductForm() {
           Describe The Item
         </label>
         <textarea
+        onChange={(e) => {
+            setItemDes(e.target.value);}}
           class="form-control"
           id="exampleFormControlTextarea1"
           rows="3"
@@ -63,16 +89,35 @@ export default function AddProductForm() {
           Unit Name
         </label>
         <input
+        onChange={(e) => {
+            setItemUnitName(e.target.value);}}
           type="text"
           className="form-control"
           id="exampleInputText1"
           aria-describedby="emailHelp"
+          placeholder="kg/dozen/per"
         />
       </div>
 
-      <button type="submit" className="btn btn-primary">
-        Submit
+      <div className="mb-3">
+        <label for="exampleInputUnit1" className="form-label">
+          Unit Price
+        </label>
+        <input
+        onChange={(e) => {
+            setItemUnitPrice(e.target.value);}}
+          type="text"
+          className="form-control"
+          id="exampleInputText1"
+          aria-describedby="emailHelp"
+          placeholder="Rs 1200"
+        />
+      </div>
+<div className="add_btn_div">
+      <button type="submit" className="btn btn-success">
+        Add Product
       </button>
+      </div>
     </div>
   );
 }

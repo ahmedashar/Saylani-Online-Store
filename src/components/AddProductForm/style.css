@@ -3,3 +3,7 @@
     border-right: 1px solid rgb(177, 177, 177) !important;
     border-bottom: 1px solid rgb(177, 177, 177) !important;
 }
+.add_btn_div{
+    display: flex;
+    justify-content: flex-end;
+}
