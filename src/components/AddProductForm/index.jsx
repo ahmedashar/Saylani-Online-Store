@@ -1,6 +1,11 @@
 import { async } from "@firebase/util";
+
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
+import { additemToDb, uploadImage } from "../../config/firebase-config";
 import "./style.css";
+
 
 export default function AddProductForm() {
     let [fileSelect, setFileSelect] = useState({});
@@ -10,6 +15,7 @@ export default function AddProductForm() {
     let [itemUnitName,setItemUnitName] = useState("")
     let [itemUnitPrice,setItemUnitPrice] = useState("")
 
+    const navigate = useNavigate();
   let categoryList = ["Fruits", "Meats", "Vagetable", "Groceries"];
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -20,8 +26,12 @@ export default function AddProductForm() {
   async function addItemToFirebaseDB(){
     try {   
     
-        // const imgUrl = await uploadImage(fileSelect);
-        // await addItemToDb( imgUrl);
+        const imgUrl = await uploadImage(fileSelect);
+        let obj = {imgUrl, itemName, category, itemDes, itemUnitName, itemUnitPrice}
+        await additemToDb(obj);
+        swal("Product Added", "Product Added Successfully", "success")
+        navigate('/')
+
 
     } catch (error) {
         alert('error' + error)
@@ -54,11 +64,7 @@ export default function AddProductForm() {
     
         {/* item category */}
       <div className="mb-3">
-        {/* <select value={myCar} onChange={handleChange}>
-            <option value="Ford">Ford</option>
-            <option value="Volvo">Volvo</option>
-            <option value="Fiat">Fiat</option>
-        </select> */}
+      
         <label id="exampleInputEmail1">Select Category</label> <br />
         <select
           value={category}
@@ -114,10 +120,11 @@ export default function AddProductForm() {
         />
       </div>
 <div className="add_btn_div">
-      <button type="submit" className="btn btn-success">
+      <button type="submit" className="btn btn-success" onClick={()=>{addItemToFirebaseDB()}}>
         Add Product
       </button>
       </div>
     </div>
   );
 }
+
