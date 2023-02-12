@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
 import logo from '../../assets/images/Logo.png'
+import { firebaseSignIn, firebaseSignUp } from '../../config/firebase-config'
 import './navbar.css'
 
 export default function Navbar() {
     const [loginToggle, setLoginToggle] = useState(false)
+    // form inputs
+    const [name, setName] = useState('')
+    const [phone, setPhone] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    signUpWithFirebase(){
+
+    }
   return (
     <div className='container'> 
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -40,14 +49,33 @@ export default function Navbar() {
   <div className="modal-dialog">
     <div className="modal-content">
       <div className="modal-header">
-        <h1 className="modal-title fs-5" id="exampleModalLabel">Sign Up</h1>
+       
+        <h1 className="modal-title fs-5" id="exampleModalLabel">{ (loginToggle)? 'Login' : 'SignUp'}</h1>
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      {(loginToggle)
+      ?
+      // login
+      <div className="modal-body">
+        <form>
+          <div className="mb-3">
+            <label for="recipient-email" className="col-form-label">Enter Email</label>
+            <input type="text" class="form-control" id="recipient-email"/>
+          </div>
+          <div className="mb-3">
+            <label for="message-text" className="col-form-label">Enter Password</label>
+            <input className="form-control" id="message-text" type="password" />
+          </div>
+        </form>
+      </div>  
+      :
+      // signup
       <div className="modal-body">
         <form>
           <div className="mb-3">
             <label for="recipient-name" className="col-form-label">Enter Full Name</label>
-            <input type="text" class="form-control" id="recipient-name"/>
+            <input onChange={(e) => {
+              setName(e.target.value)}} type="text" class="form-control" id="recipient-name"/>
           </div>
           <div className="mb-3">
             <label for="recipient-phone" className="col-form-label">Contact Number</label>
@@ -63,13 +91,16 @@ export default function Navbar() {
           </div>
         </form>
       </div>
+      }
       <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" className="btn btn-primary" onClick={()=>{}}>Login</button>
+        {(loginToggle)?<button type="button" className="btn btn-primary" onClick={()=>{}}>Login</button>:<button type="button" className="btn btn-primary" onClick={()=>{}}>SignUp</button>}
+        
       </div>
 
       <div className='login_conditions'>
-        <p>create account <span className='admin_login_link' onClick={()=>{setLoginToggle(true)}}>sign up</span></p>
+        {(loginToggle)? <p className='admin_login_link' onClick={()=>setLoginToggle(false)}>Create an account? SignUp</p>: <p className='admin_login_link' onClick={()=>setLoginToggle(true)}>Already have an account? Login</p>}
+       
       </div>
     </div>
   </div>
