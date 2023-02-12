@@ -1,8 +1,10 @@
 import React from 'react'
+import Footer from '../../components/Footer'
 import GetProducts from '../../components/GetProducts'
 import Heading from '../../components/Heading'
 import Navbar from '../../components/Navbar'
 import Slider from '../../components/Slider'
+
 
 
 export default function Home() {
@@ -12,6 +14,7 @@ export default function Home() {
         <Slider />
         <Heading />
         <GetProducts/>
+        <Footer/>
         
     </div>
   )
