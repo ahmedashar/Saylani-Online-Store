@@ -31,5 +31,5 @@ function firebaseSignIn(email,password) {
     return signInWithEmailAndPassword(auth, email, password)
 }
 export {
-    firebaseSignIn,firebaseSignUp
+    firebaseSignIn,firebaseSignUp, auth
 }

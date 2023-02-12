@@ -1,19 +1,43 @@
 import { async } from '@firebase/util'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import swal from 'sweetalert'
 import logo from '../../assets/images/Logo.png'
-import { firebaseSignIn, firebaseSignUp } from '../../config/firebase-config'
+import { auth, firebaseSignIn, firebaseSignUp } from '../../config/firebase-config'
 import './navbar.css'
+import AdminNav from '../AdminNav'
+import { onAuthStateChanged } from 'firebase/auth'
+
+
 
 export default function Navbar() {
     const [loginToggle, setLoginToggle] = useState(false)
     const [modalClose, setModalClose] = useState('')
+    const [adminNav,setAdminNav] = useState(false)
+    const [userNav,setUserNav] = useState(false)
     // form inputs
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    // calling from adminNav
+    function adminAuthCheck(value){
+      setAdminNav(value);
+    }
+
+     useEffect(() => {
+      // check user login or not
+      onAuthStateChanged(auth, (user) => {
+        if (user.uid == '5jQNEmw4SJWsKyovYzwDe23o4yl2') {
+          setAdminNav(true)
+        } else {
+          setAdminNav(false)
+        }
+      });
+    }, []);
+    
+
+    // signUp
     async function signUpWithFirebase(){
       console.log(email)
       try {
@@ -24,10 +48,12 @@ export default function Navbar() {
         alert('error' + error)
       }
     }
-
+    // Login
     async function signInWithFirebase(){
       try {
-      await firebaseSignIn(email,password)
+        await firebaseSignIn(email,password)
+        console.log(auth)
+        if(auth.currentUser.uid == '5jQNEmw4SJWsKyovYzwDe23o4yl2'){ setAdminNav(true) } 
       setModalClose('modal')
       swal("Login", "Login successfull", "success")
       } catch (error) {
@@ -62,6 +88,9 @@ export default function Navbar() {
     </div>
   </div>
 </nav>
+
+{(adminNav)?<AdminNav adminAuthCheck={adminAuthCheck} />:<></>}
+
 
 {/* login modal start */}
 
