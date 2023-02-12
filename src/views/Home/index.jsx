@@ -6,7 +6,7 @@ import Slider from '../../components/Slider'
 
 export default function Home() {
   return (
-    <div className='container=fluid'>
+    <div className='container-fluid'>
         <Navbar />
         <Slider />
         <Heading />

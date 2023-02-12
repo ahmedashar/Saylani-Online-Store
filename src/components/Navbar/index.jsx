@@ -65,7 +65,7 @@ export default function Navbar() {
   }
   return (
     <div className="container-fluid">
-      <div className="container">
+      <div className="container-fluid">
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
           <div className="container-fluid">
             <img className="app_logo" src={logo} alt="logo" />

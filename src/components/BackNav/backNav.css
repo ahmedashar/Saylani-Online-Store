@@ -1,0 +1,15 @@
+
+.back_nav_cont{
+    background-color: #61b846;
+    padding: 15px 10px !important;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+.back_arrow{
+ color: white;
+ font-size: 20px;   
+}
+.title_back_nav{
+    color: white;
+}
