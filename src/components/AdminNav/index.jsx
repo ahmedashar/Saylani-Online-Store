@@ -1,11 +1,13 @@
 import { signOut } from "firebase/auth";
 import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import logo from '../../assets/images/admin_avatar2.png'
 import { auth } from "../../config/firebase-config";
 import './style.css'
 
 export default function AdminNav(prop) {
+  const navigate = useNavigate();
   let {adminAuthCheck} = prop
   // logout
   const signOutUser = () => {
@@ -18,7 +20,7 @@ export default function AdminNav(prop) {
         alert("Error in SignOut" + error);
       })}
   return (
-    <div className="container admin_nav_cont1">
+    <div className="container-fluid admin_nav_cont1">
       <nav className="navbar navbar-expand-lg bg-body-tertiary admin_nav_cont2">
         <div className="container-fluid admin_nav">
           <img className="app_logo admin_logo" src={logo} alt="logo" />
@@ -38,7 +40,9 @@ export default function AdminNav(prop) {
           <div className="collapse navbar-collapse" id="navbarSupportedContents">
             <ul className="navbar-nav m-auto mb-2 mb-lg-0">
               <li className="nav-item admin_nav_links">
-                <a className="nav-link admin_nav_links" aria-current="page" href="#">
+                <a className="nav-link admin_nav_links" aria-current="page"   onClick={() => {
+              navigate("/additems");
+            }}>
                   Add Items
                 </a>
               </li>

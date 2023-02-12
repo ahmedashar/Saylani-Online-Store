@@ -1,3 +1,17 @@
+.heading_cont{
+   
+}
 .heading_div{
-    
+font-size: 90px !important;
+font-size: bolder;
+
+}
+.heading2_div{
+    color: #61B846;
+    font-size: 60px !important;
+}
+.heading3_div{
+    margin-top: -10px;
+    color: #024F9D;
+    font-size: 30px;
 }
