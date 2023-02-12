@@ -28,14 +28,14 @@ export default function AdminNav(prop) {
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
+            data-bs-target="#navbarSupportedContents"
+            aria-controls="navbarSupportedContents"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="collapse navbar-collapse" id="navbarSupportedContents">
             <ul className="navbar-nav m-auto mb-2 mb-lg-0">
               <li className="nav-item admin_nav_links">
                 <a className="nav-link admin_nav_links" aria-current="page" href="#">
