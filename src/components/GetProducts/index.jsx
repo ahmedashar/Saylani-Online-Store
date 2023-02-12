@@ -24,7 +24,7 @@ export default function GetProducts() {
   return (
     <div className="container-fluid get_product_cont">
         <h3>All Products</h3>
-        <div className="row">
+        <div className="row card_cont_row">
          {items.map((item)=>{
             console.log('hello ', item)
             return(
