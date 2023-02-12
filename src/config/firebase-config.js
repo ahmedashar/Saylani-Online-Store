@@ -50,6 +50,16 @@ function additemToDb(obj) {
   });
 }
 
-export {
-    firebaseSignIn,firebaseSignUp, auth, uploadImage, additemToDb
+async function getItemsFromDb(){
+  const querySnapshot = await getDocs(collection(db, 'companies'))
+  const items = []
+  
+  querySnapshot.forEach((doc)=>{
+    items.push({id: doc.id, ...doc.data()})
+  });
+  return items;
 }
+export {
+    firebaseSignIn,firebaseSignUp, auth, uploadImage, additemToDb, getItemsFromDb
+}
+//

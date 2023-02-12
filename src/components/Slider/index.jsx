@@ -7,7 +7,7 @@ export default function Slider() {
 
     ]
   return (
-    <div id="carouselExample" className="carousel slide container slider_div">
+    <div id="carouselExample" className="carousel slide container-fluid slider_div">
       <div className="carousel-inner">
         <div className="carousel-item">
           <img src={imgSrc[0]} className="d-block w-100 slider_img" alt="..." />
