@@ -1,6 +1,8 @@
 
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, setDoc, doc, addDoc, collection, getDocs, getDoc, where, query, onSnapshot } from "firebase/firestore";
+
 
 
 const firebaseConfig = {
@@ -14,6 +16,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app)
+const db = getFirestore(app);
 
 async function firebaseSignUp(name,phone,email,password){
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);

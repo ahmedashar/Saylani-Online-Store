@@ -1,17 +1,38 @@
+import { async } from '@firebase/util'
 import React, { useState } from 'react'
+import swal from 'sweetalert'
 import logo from '../../assets/images/Logo.png'
 import { firebaseSignIn, firebaseSignUp } from '../../config/firebase-config'
 import './navbar.css'
 
 export default function Navbar() {
     const [loginToggle, setLoginToggle] = useState(false)
+    const [modalClose, setModalClose] = useState('')
     // form inputs
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    signUpWithFirebase(){
 
+    async function signUpWithFirebase(){
+      console.log(email)
+      try {
+        await firebaseSignUp(name, phone, email,password)
+        setModalClose('modal')
+        swal("Login", "SignUp successfull", "success")
+      } catch (error) {
+        alert('error' + error)
+      }
+    }
+
+    async function signInWithFirebase(){
+      try {
+      await firebaseSignIn(email,password)
+      setModalClose('modal')
+      swal("Login", "Login successfull", "success")
+      } catch (error) {
+        alert('error', error)
+      }
     }
   return (
     <div className='container'> 
@@ -60,11 +81,13 @@ export default function Navbar() {
         <form>
           <div className="mb-3">
             <label for="recipient-email" className="col-form-label">Enter Email</label>
-            <input type="text" class="form-control" id="recipient-email"/>
+            <input onChange={(e) => {
+              setEmail(e.target.value)}} type="text" class="form-control" id="recipient-email"/>
           </div>
           <div className="mb-3">
             <label for="message-text" className="col-form-label">Enter Password</label>
-            <input className="form-control" id="message-text" type="password" />
+            <input onChange={(e) => {
+              setPassword(e.target.value)}} className="form-control" id="message-text" type="password" />
           </div>
         </form>
       </div>  
@@ -79,22 +102,25 @@ export default function Navbar() {
           </div>
           <div className="mb-3">
             <label for="recipient-phone" className="col-form-label">Contact Number</label>
-            <input type="text" class="form-control" id="recipient-phone"/>
+            <input onChange={(e) => {
+              setPhone(e.target.value)}} type="text" class="form-control" id="recipient-phone"/>
           </div>
           <div className="mb-3">
             <label for="recipient-email" className="col-form-label">Enter Email</label>
-            <input type="text" class="form-control" id="recipient-email"/>
+            <input onChange={(e) => {
+              setEmail(e.target.value)}} type="text" class="form-control" id="recipient-email"/>
           </div>
           <div className="mb-3">
             <label for="message-text" className="col-form-label">Enter Password</label>
-            <input className="form-control" id="message-text" type="password" />
+            <input onChange={(e) => {
+              setPassword(e.target.value)}} className="form-control" id="message-text" type="password" />
           </div>
         </form>
       </div>
       }
       <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        {(loginToggle)?<button type="button" className="btn btn-primary" onClick={()=>{}}>Login</button>:<button type="button" className="btn btn-primary" onClick={()=>{}}>SignUp</button>}
+        {(loginToggle)?<button type="button" className="btn btn-primary" onClick={()=>{signInWithFirebase()}} data-bs-dismiss={modalClose}>Login</button>:<button type="button" className="btn btn-primary" onClick={()=>{signUpWithFirebase()}} data-bs-dismiss={modalClose} >SignUp</button>}
         
       </div>
 
