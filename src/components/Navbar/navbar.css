@@ -4,3 +4,13 @@
 .org_name{
     color: #61B846;
 }
+.login_conditions{
+    display: flex;
+    justify-content: space-evenly;
+
+}
+.admin_login_link{
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}

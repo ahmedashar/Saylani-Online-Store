@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../../assets/images/Logo.png'
 import './navbar.css'
+
 export default function Navbar() {
+    const [loginToggle, setLoginToggle] = useState(false)
   return (
     <div className='container'> 
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -25,11 +27,55 @@ export default function Navbar() {
         </li>
       </ul>
       <div className="d-flex">
-        <button className="btn btn-outline-success" onClick={()=>}>Login</button>
+        <button className="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" onClick={()=>{}}>Sign Up</button>
       </div>
     </div>
   </div>
 </nav>
+
+{/* login modal start */}
+
+<div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h1 className="modal-title fs-5" id="exampleModalLabel">Sign Up</h1>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div className="modal-body">
+        <form>
+          <div className="mb-3">
+            <label for="recipient-name" className="col-form-label">Enter Full Name</label>
+            <input type="text" class="form-control" id="recipient-name"/>
+          </div>
+          <div className="mb-3">
+            <label for="recipient-phone" className="col-form-label">Contact Number</label>
+            <input type="text" class="form-control" id="recipient-phone"/>
+          </div>
+          <div className="mb-3">
+            <label for="recipient-email" className="col-form-label">Enter Email</label>
+            <input type="text" class="form-control" id="recipient-email"/>
+          </div>
+          <div className="mb-3">
+            <label for="message-text" className="col-form-label">Enter Password</label>
+            <input className="form-control" id="message-text" type="password" />
+          </div>
+        </form>
+      </div>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" className="btn btn-primary" onClick={()=>{}}>Login</button>
+      </div>
+
+      <div className='login_conditions'>
+        <p>create account <span className='admin_login_link' onClick={()=>{setLoginToggle(true)}}>sign up</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+{/* login modal end */}
+
 </div>
 )
   
